@@ -1,0 +1,38 @@
+<!DOCTYPE XML>
+<configuration>
+
+	<property name="pathfile" value="${catalina.base}/logs" />
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${pathfile}/criticalities-web.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${pathfile}/archived/criticalities-web.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="org.springframework" level="WARN"/>
+	<logger name="org.hibernate" level="WARN" />
+	<logger name="org.hibernate.cache" level="ERROR" />
+	<logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="net.sf.ehcache" level="WARN"/>
+    <logger name="com.vaadin.spring" level="WARN"/>
+    <logger name="org.vaadin.spring" level="WARN"/> 
+    <logger name="org.atmosphere" level="WARN"/>
+    <logger name="es.cic" level="INFO"/>
+
+	<root level="WARN">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
